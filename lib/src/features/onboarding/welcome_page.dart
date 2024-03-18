@@ -3,7 +3,7 @@ import 'package:psychology_test_app/src/core/common/common_button.dart';
 import 'package:psychology_test_app/src/core/common/common_text.dart';
 import 'package:psychology_test_app/src/core/common/common_title.dart';
 import 'package:psychology_test_app/src/core/constants/app_colors.dart';
-import 'package:psychology_test_app/src/features/tests/tests_page.dart';
+import 'package:psychology_test_app/src/features/navigation/bottom_nav_bar.dart';
 
 class WelcomePage extends StatelessWidget {
   const WelcomePage({super.key});
@@ -39,7 +39,7 @@ class WelcomePage extends StatelessWidget {
                   Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const TestsPage()));
+                          builder: (context) => const BottomNavBar()));
                 },
                 text: 'Давайте начнем!')
           ],

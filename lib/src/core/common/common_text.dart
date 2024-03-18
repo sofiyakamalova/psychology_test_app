@@ -13,7 +13,7 @@ class CommonText extends StatelessWidget {
     super.key,
     required this.text,
     this.color = AppColors.black_color,
-    this.fontWeight = FontWeight.w300,
+    this.fontWeight = FontWeight.normal,
     this.textStyle,
     this.text_align = TextAlign.center,
     this.size = 17.0,
@@ -26,7 +26,8 @@ class CommonText extends StatelessWidget {
       style: TextStyle(
         color: color,
         fontSize: size,
-        //fontFamily: 'Nunito',
+        fontFamily: 'Nunito',
+        // overflow: TextOverflow.ellipsis,
         fontWeight: fontWeight,
       ),
       textAlign: text_align,
