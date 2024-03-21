@@ -8,6 +8,7 @@ class CommonText extends StatelessWidget {
   final TextStyle? textStyle;
   final TextAlign? text_align;
   final double? size;
+  final int? maxLines;
 
   const CommonText({
     super.key,
@@ -17,6 +18,7 @@ class CommonText extends StatelessWidget {
     this.textStyle,
     this.text_align = TextAlign.center,
     this.size = 17.0,
+    this.maxLines,
   });
 
   @override
@@ -30,6 +32,7 @@ class CommonText extends StatelessWidget {
         // overflow: TextOverflow.ellipsis,
         fontWeight: fontWeight,
       ),
+      maxLines: maxLines,
       textAlign: text_align,
       softWrap: true,
     );

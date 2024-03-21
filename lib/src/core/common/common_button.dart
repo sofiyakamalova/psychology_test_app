@@ -7,6 +7,7 @@ class CommonButton extends StatelessWidget {
   final Color border_color;
   final Color background_color;
   final Color text_color;
+  final double pad_size;
 
   const CommonButton({
     super.key,
@@ -15,6 +16,7 @@ class CommonButton extends StatelessWidget {
     this.border_color = AppColors.primary_color,
     this.background_color = AppColors.primary_color,
     this.text_color = AppColors.white_color,
+    this.pad_size = 20,
   });
 
   @override
@@ -22,7 +24,7 @@ class CommonButton extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        margin: const EdgeInsets.symmetric(vertical: 20),
+        margin: EdgeInsets.symmetric(vertical: pad_size),
         padding: const EdgeInsets.all(15),
         decoration: BoxDecoration(
           color: background_color,
@@ -33,13 +35,14 @@ class CommonButton extends StatelessWidget {
           ),
         ),
         child: Center(
-            child: Text(
-          text,
-          style: TextStyle(
-            color: text_color,
-            fontWeight: FontWeight.bold,
+          child: Text(
+            text,
+            style: TextStyle(
+              color: text_color,
+              fontWeight: FontWeight.bold,
+            ),
           ),
-        )),
+        ),
       ),
     );
   }

@@ -1,4 +1,4 @@
-import 'package:psychology_test_app/src/features/onboarding/components/onboarding_details.dart';
+import 'package:psychology_test_app/src/features/onboarding/model/onboarding_details.dart';
 
 class OnboardingData {
   List<OnboardingDetails> items = [

@@ -1,20 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:psychology_test_app/src/features/tests/components/animation_page.dart';
+import 'package:psychology_test_app/src/features/tests/components/animation/animation_page.dart';
+import 'package:psychology_test_app/src/features/tests/components/animation/data/animation_data.dart';
 import 'package:psychology_test_app/src/features/tests/models/question.dart';
-import 'package:psychology_test_app/src/features/tests/test_result_page.dart';
+import 'package:psychology_test_app/src/features/tests/ui/result/test_result_page.dart';
 
 class QuizProvider extends ChangeNotifier {
   BuildContext context;
 
   QuizProvider(this.context);
+
   int counter1 = 0;
   int counter2 = 0;
   int counter3 = 0;
   int counter4 = 0;
 
+  List<String> selectedEmotions = [];
+
   final List<Question> questions = [
-    Question("",
-        "Я внимательно выслушал инструкцию и готов откровенно ответить на все вопросы"),
     Question('Д',
         "Я часто легко отвлекаюсь от дела, становлюсь рассеянным и мечтательным"),
     Question('Н', "Я устаю быстрее, чем большинство окружающих меня людей"),
@@ -109,7 +111,9 @@ class QuizProvider extends ChangeNotifier {
   ];
 
   int currentIndex = 0;
+
   bool testSubmitted = false;
+
   final Map<int, String> selectedAnswers = {};
 
   void answerQuestion(String value) {
@@ -125,34 +129,46 @@ class QuizProvider extends ChangeNotifier {
     nextQuestion();
   }
 
-  void nextQuestion() {
-    if (currentIndex < questions.length - 1) {
-      if ((currentIndex + 1) % 10 == 0) {
-        Navigator.push(context,
-                MaterialPageRoute(builder: (context) => AnimationPage()))
-            .then((value) {
-          currentIndex++;
-          notifyListeners();
-        });
-      } else {
-        currentIndex++;
-        notifyListeners();
-      }
-    } else {
-      submitTest();
+  void setSelectedEmotion(String emotion) {
+    if (!selectedEmotions.contains(emotion)) {
+      selectedEmotions.add(emotion);
+      print(selectedEmotions);
+      notifyListeners();
     }
   }
 
-  void submitTest() {
-    testSubmitted = true;
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => TestResultPage(
-                counter1: counter1,
-                counter2: counter2,
-                counter3: counter3,
-                counter4: counter4)));
+  final animation_data = AnimationData();
+  int animation_index = 0;
+
+  void nextQuestion() {
+    if (currentIndex < questions.length - 1) {
+      currentIndex++;
+      if ((currentIndex + 1) % 10 == 0) {
+        if (currentIndex != questions.length - 1) {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => AnimationPage(
+                      data: animation_data.items[animation_index %
+                          (animation_data.items.length - 1)]))).then((value) {
+            animation_index =
+                (animation_index + 1) % (animation_data.items.length - 1);
+            notifyListeners();
+          });
+        }
+      } else {
+        notifyListeners();
+      }
+    } else {
+      Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) =>
+                      AnimationPage(data: animation_data.items.last)))
+          .then((value) {
+        submitTest();
+      });
+    }
   }
 
   void previousQuestion() {
@@ -160,5 +176,22 @@ class QuizProvider extends ChangeNotifier {
       currentIndex--;
       notifyListeners();
     }
+  }
+
+  void submitTest() {
+    testSubmitted = true;
+    print(selectedEmotions);
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => TestResultPage(
+          counter1: counter1,
+          counter2: counter2,
+          counter3: counter3,
+          counter4: counter4,
+          emotions_list: selectedEmotions,
+        ),
+      ),
+    );
   }
 }
