@@ -38,12 +38,11 @@ class _QuizPageState extends State<QuizPage> {
         ),
         backgroundColor: AppColors.white_color,
         body: ChangeNotifierProvider(
-          create: (context) => QuizProvider(context),
+          create: (_) => QuizProvider(context),
           child: Consumer<QuizProvider>(
             builder: (context, provider, child) {
               QuestionTracker progressTracker =
                   QuestionTracker(provider.questions);
-
               progressTracker.updateProgress(provider.currentIndex);
               // Scroll to the current index
               WidgetsBinding.instance!.addPostFrameCallback((_) {
@@ -58,6 +57,7 @@ class _QuizPageState extends State<QuizPage> {
                       children: [
                         Expanded(
                           child: CommonTitle(
+                              size: 18,
                               text:
                                   'Вопрос ${provider.currentIndex + 1} из 74'),
                         ),
@@ -65,7 +65,7 @@ class _QuizPageState extends State<QuizPage> {
                           flex: 1,
                           child: Padding(
                             padding:
-                                const EdgeInsets.symmetric(horizontal: 15.0),
+                                const EdgeInsets.symmetric(horizontal: 20.0),
                             child: CommonButton(
                               onTap: provider.previousQuestion,
                               text: ('Пред. вопрос'),
@@ -104,11 +104,14 @@ class _QuizPageState extends State<QuizPage> {
                             visible: provider.currentIndex == index,
                             child: Column(
                               children: [
-                                Align(
+                                SizedBox(
+                                  width: double.maxFinite,
+                                  height: 100,
                                   child: CommonText(
+                                    maxLines: 5,
                                     text:
                                         '${provider.currentIndex + 1}. ${provider.questions[index].questionText}',
-                                    size: 20,
+                                    size: 18,
                                     fontWeight: FontWeight.w400,
                                     color: AppColors.dark_grey_color,
                                     text_align: TextAlign.start,
@@ -161,8 +164,8 @@ class _QuizPageState extends State<QuizPage> {
 
   void _scrollToCurrentIndex(int currentIndex) {
     _controller.animateTo(
-      currentIndex * 45.0,
-      duration: const Duration(milliseconds: 300),
+      currentIndex * 50.0,
+      duration: const Duration(milliseconds: 250),
       curve: Curves.easeInOut,
     );
   }

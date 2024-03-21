@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "560092998193",
+    "project_id": "psychology-app-2f3e8",
+    "storage_bucket": "psychology-app-2f3e8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:560092998193:android:ed377bfc3421a2f7ea0310",
+        "android_client_info": {
+          "package_name": "com.example.psychology_test_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCVDq_E3WL1NVOVbzDHoKi-I5aPw4ZE1eg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
